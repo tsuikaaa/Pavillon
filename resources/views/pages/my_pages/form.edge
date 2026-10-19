@@ -1,0 +1,42 @@
+@layouts.app({ title: page ? 'Modifier la page' : 'Nouvelle page' })
+  @page()
+    <h1>{{ page ? 'Modifier la page' : 'Nouvelle page' }}</h1>
+
+    <form
+      method="POST"
+      action="{{ page ? route('pages.update', { id: page.id }) : route('pages.store') }}"
+      style="display: grid; gap: 14px; max-width: 480px;"
+    >
+      {{ csrfField() }}
+
+      <label>
+        Titre
+        <input type="text" name="title" value="{{ old('title', page ? page.title : '') }}" required />
+        @if(flashMessages.has('inputErrorsBag.title'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.title') }}</small>
+        @end
+      </label>
+
+      <label>
+        Slug (adresse publique : /p/le-slug)
+        <input type="text" name="slug" value="{{ old('slug', page ? page.slug : '') }}" required />
+        @if(flashMessages.has('inputErrorsBag.slug'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.slug') }}</small>
+        @end
+      </label>
+
+      <label>
+        Description (facultative)
+        <textarea name="description" rows="3">{{ old('description', page ? (page.description || '') : '') }}</textarea>
+        @if(flashMessages.has('inputErrorsBag.description'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.description') }}</small>
+        @end
+      </label>
+
+      <div style="display: flex; gap: 8px;">
+        <button type="submit" class="btn btn--secondary">Enregistrer</button>
+        <a href="{{ route('pages.index') }}" class="btn btn--secondary">Annuler</a>
+      </div>
+    </form>
+  @end
+@end
