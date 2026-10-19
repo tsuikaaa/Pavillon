@@ -7,6 +7,48 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class LinkSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'isPublic', 'label', 'pageId', 'updatedAt', 'url', 'userId'] as const
+  $columns = LinkSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isPublic: boolean
+  @column()
+  declare label: string
+  @column()
+  declare pageId: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare url: string
+  @column()
+  declare userId: number
+}
+
+export class PageSchema extends BaseModel {
+  static $columns = ['coverImage', 'createdAt', 'description', 'id', 'slug', 'title', 'updatedAt', 'userId'] as const
+  $columns = PageSchema.$columns
+  @column()
+  declare coverImage: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare slug: string
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns

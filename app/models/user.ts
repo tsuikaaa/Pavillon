@@ -3,12 +3,23 @@ import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 
+import { hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Page from '#models/page'
+import Link from '#models/link'
+
 /**
  * User model represents a user in the application.
  * It extends UserSchema and includes authentication capabilities
  * through the withAuthFinder mixin.
  */
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
+  @hasMany(() => Page)
+  declare pages: HasMany<typeof Page>
+
+  @hasMany(() => Link)
+  declare links: HasMany<typeof Link>
+
   /**
    * Get the user's initials from their full name or email.
    * Returns the first letter of first and last name if available,
