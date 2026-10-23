@@ -8,7 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class LinkSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'isPublic', 'label', 'pageId', 'updatedAt', 'url', 'userId'] as const
+  static $columns = ['createdAt', 'id', 'isPublic', 'label', 'pageId', 'position', 'updatedAt', 'url', 'userId'] as const
   $columns = LinkSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -20,6 +20,8 @@ export class LinkSchema extends BaseModel {
   declare label: string
   @column()
   declare pageId: number | null
+  @column()
+  declare position: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()

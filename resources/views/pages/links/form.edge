@@ -1,0 +1,53 @@
+@layouts.app({ title: link ? 'Modifier le lien' : 'Nouveau lien' })
+  @page()
+    <h1>{{ link ? 'Modifier le lien' : 'Nouveau lien' }}</h1>
+
+    <form
+      method="POST"
+      action="{{ link ? route('links.update', { id: link.id }) : route('links.store') }}"
+      style="display: grid; gap: 14px; max-width: 480px;"
+    >
+      {{ csrfField() }}
+
+      <label>
+        Libellé
+        <input type="text" name="label" value="{{ old('label', link ? link.label : '') }}" required />
+        @if(flashMessages.has('inputErrorsBag.label'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.label') }}</small>
+        @end
+      </label>
+
+      <label>
+        URL (https://...)
+        <input type="text" name="url" value="{{ old('url', link ? link.url : '') }}" required />
+        @if(flashMessages.has('inputErrorsBag.url'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.url') }}</small>
+        @end
+      </label>
+
+      <label>
+        Page
+        @let(selectedPageId = old('pageId', link ? link.pageId : ''))
+        <select name="pageId">
+          <option value="">Aucune page</option>
+          @each(p in pages)
+            <option value="{{ p.id }}" {{ selectedPageId == p.id ? 'selected' : '' }}>{{ p.title }}</option>
+          @end
+        </select>
+        @if(flashMessages.has('inputErrorsBag.pageId'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.pageId') }}</small>
+        @end
+      </label>
+
+      <label style="display: flex; gap: 8px; align-items: center;">
+        <input type="checkbox" name="isPublic" value="true" {{ (link && link.isPublic) ? 'checked' : '' }} />
+        Afficher sur la page publique
+      </label>
+
+      <div style="display: flex; gap: 8px;">
+        <button type="submit" class="btn btn--secondary">Enregistrer</button>
+        <a href="{{ route('links.index') }}" class="btn btn--secondary">Annuler</a>
+      </div>
+    </form>
+  @end
+@end

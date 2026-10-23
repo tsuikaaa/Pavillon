@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page introuvable</title>
+    @vite(['resources/css/app.css'])
+  </head>
+  <body>
+    <main style="max-width: 480px; margin: 96px auto; padding: 0 16px; text-align: center;">
+      <p class="mono" style="font-size: 14px;">Erreur 404</p>
+      <h1>Page introuvable</h1>
+      <p>Cette page n'existe pas, ou son adresse a changé.</p>
+      <p style="margin-top: 24px;">
+        <a href="{{ route('home') }}" class="btn btn--secondary">Retour à l'accueil</a>
+      </p>
+    </main>
+  </body>
+</html>

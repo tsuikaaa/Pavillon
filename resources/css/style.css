@@ -1,0 +1,250 @@
+:root,
+:root[data-theme] {
+  --pink: #f7dce5;
+  --pink-soft: #fbc4d4;
+  --pink-strong: #ef8fb3;
+  --brown: #3b2626;
+  --cream: #fff3f6;
+  --border: #3b2626;
+  --ok: #3b2626;
+}
+
+html body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  color: var(--brown);
+  background-color: var(--pink);
+  background-image:
+    radial-gradient(var(--brown) 7px, transparent 7.5px),
+    radial-gradient(var(--brown) 7px, transparent 7.5px);
+  background-size: 64px 64px;
+  background-position: 0 0, 32px 32px;
+}
+
+html body h1,
+html body h2,
+html body .auth__title,
+html body .pc-lead {
+  font-family: 'Dancing Script', cursive;
+  color: var(--brown);
+}
+
+/* Cartes et blocs */
+html body .prose-card {
+  background: var(--cream);
+  border: 3px solid var(--brown);
+  border-radius: 32px;
+  box-shadow: 8px 8px 0 var(--brown);
+}
+
+/* Header */
+html body .header {
+  background: var(--cream);
+  border-bottom: 3px solid var(--brown);
+}
+
+/* Boutons */
+html body .btn {
+  border: 2px solid var(--brown);
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0 var(--brown);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+html body .btn--primary {
+  background: var(--pink-strong);
+  color: var(--brown);
+}
+html body .btn--secondary {
+  background: var(--brown);
+  color: var(--cream);
+  box-shadow: 3px 3px 0 var(--pink-strong);
+}
+html body .btn--ghost {
+  background: var(--cream);
+  color: var(--brown);
+}
+html body .btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--brown);
+}
+html body .btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--brown);
+}
+
+/* Lignes de liens de l'accueil */
+html body .lrow {
+  border-color: var(--brown);
+  color: var(--brown);
+}
+html body .lrow:hover {
+  background: var(--pink-soft);
+}
+
+/* Champs de formulaire */
+html body input {
+  border: 2px solid var(--brown);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--brown);
+}
+html body input:focus-visible {
+  outline: 3px dotted var(--brown);
+  outline-offset: 2px;
+}
+
+
+html body .auth__form-col {
+  background: var(--cream);
+}
+html body .auth__aside {
+  background: var(--pink-soft);
+  border-left: 3px solid var(--brown);
+}
+
+/* Pages de connexion et d'inscription : une seule carte centree */
+html body .auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+}
+html body .auth__form-col {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+html body .auth__form-wrap {
+  width: 100%;
+}
+
+
+/* Layout connecte : header + contenu large */
+html body .shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+html body .shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: var(--cream);
+  border-bottom: 3px solid var(--brown);
+}
+html body .shell__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+html body .shell__card {
+  background: var(--cream);
+  border: 3px solid var(--brown);
+  border-radius: 32px;
+  box-shadow: 8px 8px 0 var(--brown);
+  padding: 32px;
+}
+
+
+/* Boutons d'action : pleins, ombre marquee */
+html body .btn--primary {
+  background: var(--brown);
+  color: var(--cream);
+  box-shadow: 4px 4px 0 var(--pink-strong);
+}
+html body .btn--secondary {
+  background: var(--pink-strong);
+  color: var(--brown);
+  box-shadow: 4px 4px 0 var(--brown);
+}
+html body .btn--ghost {
+  background: var(--cream);
+  color: var(--brown);
+  box-shadow: 3px 3px 0 var(--brown);
+}
+html body .btn {
+  cursor: pointer;
+}
+html body .btn--primary:hover,
+html body .btn--secondary:hover,
+html body .btn--ghost:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--brown);
+}
+html body .btn--primary:hover {
+  box-shadow: 6px 6px 0 var(--pink-strong);
+}
+
+/* Liens cliquables dans le contenu : contour epais, remplissage rose au survol */
+html body .shell__card a:not(.btn):not([style*="border-radius"]) {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 2px solid var(--brown);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--brown);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 var(--brown);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+html body .shell__card a:not(.btn):not([style*="border-radius"]):hover {
+  background: var(--pink-strong);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--brown);
+}
+
+/* Cartes compteurs (liens avec style en ligne) */
+html body .shell__card a[style*="border-radius"] {
+  display: block !important;
+  border: 2px solid var(--brown) !important;
+  border-radius: 20px !important;
+  background: var(--cream);
+  box-shadow: 4px 4px 0 var(--brown);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+html body .shell__card a[style*="border-radius"]:hover {
+  background: var(--pink-strong);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--brown);
+}
+
+html body .shell__card a:focus-visible,
+html body .btn:focus-visible {
+  outline: 3px dotted var(--brown);
+  outline-offset: 3px;
+}
+
+
+/* Espacement entre les blocs */
+html body .shell__card [style*="display: grid"] {
+  gap: 22px !important;
+}
+html body .shell__card [style*="display: flex"] {
+  gap: 18px !important;
+  margin: 20px 0 28px !important;
+}
+html body .shell__card h2 {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+html body .shell__card li {
+  padding: 16px 20px !important;
+}
+html body .shell__card ul + p {
+  margin-top: 26px;
+}
+html body .shell__card p {
+  margin-bottom: 16px;
+}

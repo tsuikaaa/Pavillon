@@ -1,59 +1,31 @@
-{{--
-  Top-level app navigation. Add an entry here for every new area of your
-  app, and it shows up in the navigation bar with its active state handled.
---}}
-@let(nav = [
-  { label: 'Dashboard', route: 'dashboard', icon: 'lucide:house' },
-  { label: 'Mes pages', route: 'pages.index', icon: 'lucide:layout-grid' }
-])
 @let(pageTitle = $props.get('title'))
 <!DOCTYPE html>
-<html
-  lang="en-us"
-  data-theme="{{
-    request.plainCookie('app_theme', {
-      defaultValue: 'light',
-      encoded: false,
-    })
-  }}"
->
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ pageTitle ? `${pageTitle} - AdonisJS` : 'AdonisJS — Starter Kit' }}</title>
+    <title>{{ pageTitle ? `${pageTitle} - Pavillon` : 'Pavillon' }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@600;800&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('dumper')
   </head>
   <body>
-    <header class="header header--bar">
-      <div class="header__inner">
-        @!logo({ size: 28 })
-        <div class="header__right">
-          @!themeToggle()
-          @form({ route: 'session.destroy', method: 'POST' })
-            <button type="submit" class="btn btn--secondary btn--sm">
-              @svg('lucide:log-out', { width: 15, height: 15 })
-              Log out
-            </button>
-          @end
-        </div>
-      </div>
-    </header>
-
-    <nav class="subnav">
-      <div class="subnav__inner">
-        @each(item in nav)
-          @navLink({ route: item.route, class: 'subnav__item' })
-            @if(item.icon)
-              @svg(item.icon, { width: 14, height: 14 })
-            @end
-            {{ item.label }}
-          @end
+    <div class="shell">
+      <header class="shell__header">
+        @!logo({ size: 30 })
+        @form({ route: 'session.destroy', method: 'POST', style: 'margin: 0;' })
+          <button type="submit" class="btn btn--ghost btn--sm">Se déconnecter</button>
         @end
-      </div>
-    </nav>
+      </header>
 
-    <div class="app-main">{{{ await $slots.main() }}}</div>
+      <main class="shell__main">
+        <div class="shell__card">
+          {{{ await $slots.main() }}}
+        </div>
+      </main>
+    </div>
     @include('partials/flash_alerts')
   </body>
 </html>

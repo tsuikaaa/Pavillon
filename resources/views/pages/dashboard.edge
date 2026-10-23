@@ -1,17 +1,55 @@
 @layouts.app({ title: 'Dashboard' })
   @page()
-    <div class="empty">
-      <div class="empty__mark">
-        @svg('lucide:layout-grid', { width: 22, height: 22 })
-      </div>
-      <h1>Your dashboard is ready</h1>
-      <p>
-        It's empty on purpose. A clean starting point with nothing to undo. Add your first route and component to begin.
-      </p>
-      <p class="mono" style="font-size: 12.5px; color: var(--subtle); margin-top: 4px;">
-        Start in
-        <span class="kbd">resources/views/pages/dashboard.edge</span>
-      </p>
+    <h1>Bonjour {{ user.fullName || user.email }}</h1>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;">
+      <a href="{{ route('pages.create') }}" class="btn btn--secondary btn--sm">Nouvelle page</a>
+      <a href="{{ route('links.create') }}" class="btn btn--secondary btn--sm">Nouveau lien</a>
     </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px;">
+      <a href="{{ route('pages.index') }}" style="border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 16px; text-decoration: none; color: inherit;">
+        <div style="font-size: 28px; font-weight: 700;">{{ pagesCount }}</div>
+        <div>page(s)</div>
+      </a>
+      <a href="{{ route('links.index') }}" style="border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 16px; text-decoration: none; color: inherit;">
+        <div style="font-size: 28px; font-weight: 700;">{{ linksCount }}</div>
+        <div>lien(s)</div>
+      </a>
+    </div>
+
+    <h2>Mes derniers liens</h2>
+    @if(recentLinks.length === 0)
+      <p>Tu n'as pas encore de lien. <a href="{{ route('links.create') }}">Ajoutes-en un</a>.</p>
+    @else
+      <ul style="list-style: none; padding: 0; display: grid; gap: 8px;">
+        @each(link in recentLinks)
+          <li style="border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 12px;">
+            <strong>{{ link.label }}</strong>
+            <span style="font-size: 13px;">
+              · {{ link.page ? link.page.title : 'aucune page' }}
+              · {{ link.isPublic ? 'Public' : 'Privé' }}
+            </span>
+            <div class="mono" style="font-size: 12.5px; word-break: break-all;">{{ link.url }}</div>
+          </li>
+        @end
+      </ul>
+      <p><a href="{{ route('links.index') }}">Voir tous mes liens</a></p>
+    @end
+
+    <h2 style="margin-top: 32px;">Mes pages</h2>
+    @if(pages.length === 0)
+      <p>Tu n'as pas encore de page. <a href="{{ route('pages.create') }}">Crée la première</a>.</p>
+    @else
+      <ul style="list-style: none; padding: 0; display: grid; gap: 8px;">
+        @each(page in pages)
+          <li style="border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 12px;">
+            <strong>{{ page.title }}</strong>
+            <a href="/p/{{ page.slug }}" target="_blank" class="mono" style="font-size: 12.5px;">/p/{{ page.slug }}</a>
+            <span style="font-size: 13px;">· {{ page.$extras.links_count }} lien(s)</span>
+          </li>
+        @end
+      </ul>
+    @end
   @end
 @end

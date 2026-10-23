@@ -1,0 +1,60 @@
+@layouts.app({ title: 'Mes liens' })
+  @page()
+    <h1>Mes liens</h1>
+    <p>
+      <a href="{{ route('links.create') }}" class="btn btn--secondary btn--sm">Nouveau lien</a>
+    </p>
+
+    <div style="display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+      <aside style="min-width: 150px; display: grid; gap: 8px;">
+        <strong style="font-size: 13px;">Trier</strong>
+        <a
+          href="{{ route('links.index') }}?tri=az"
+          class="btn btn--secondary btn--sm"
+          style="{{ sort === 'az' ? 'font-weight: 800; border-width: 2px;' : '' }}"
+        >A → Z</a>
+        <a
+          href="{{ route('links.index') }}?tri=za"
+          class="btn btn--secondary btn--sm"
+          style="{{ sort === 'za' ? 'font-weight: 800; border-width: 2px;' : '' }}"
+        >Z → A</a>
+        <a
+          href="{{ route('links.index') }}?tri=recent"
+          class="btn btn--secondary btn--sm"
+          style="{{ sort === 'recent' ? 'font-weight: 800; border-width: 2px;' : '' }}"
+        >Récents</a>
+      </aside>
+
+      <div style="flex: 1; min-width: 260px;">
+        @if(links.length === 0)
+          <p>Tu n'as pas encore de lien.</p>
+        @else
+          <ul style="list-style: none; padding: 0; display: grid; gap: 12px; margin: 0;">
+            @each(link in links)
+              <li style="border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 12px;">
+                <strong>{{ link.label }}</strong>
+                <div class="mono" style="font-size: 12.5px; word-break: break-all;">{{ link.url }}</div>
+                <div style="font-size: 13px;">
+                  Page : {{ link.page ? link.page.title : 'aucune' }}
+                  ·
+                  {{ link.isPublic ? 'Public' : 'Privé' }}
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                  <a href="{{ route('links.edit', { id: link.id }) }}" class="btn btn--secondary btn--sm">Modifier</a>
+                  <form
+                    method="POST"
+                    action="{{ route('links.destroy', { id: link.id }) }}"
+                    onsubmit="return confirm('Supprimer ce lien ?')"
+                  >
+                    {{ csrfField() }}
+                    <button type="submit" class="btn btn--secondary btn--sm">Supprimer</button>
+                  </form>
+                </div>
+              </li>
+            @end
+          </ul>
+        @end
+      </div>
+    </div>
+  @end
+@end
