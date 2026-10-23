@@ -7,6 +7,17 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class LinkPageSchema extends BaseModel {
+  static $columns = ['id', 'linkId', 'pageId'] as const
+  $columns = LinkPageSchema.$columns
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare linkId: number
+  @column()
+  declare pageId: number
+}
+
 export class LinkSchema extends BaseModel {
   static $columns = ['createdAt', 'id', 'isPublic', 'label', 'pageId', 'position', 'updatedAt', 'url', 'userId'] as const
   $columns = LinkSchema.$columns
