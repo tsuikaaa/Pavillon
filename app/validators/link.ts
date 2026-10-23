@@ -15,6 +15,6 @@ const url = () =>
 export const linkValidator = vine.create({
   label: label(),
   url: url(),
-  pageId: vine.number().nullable(),
+  pageIds: vine.array(vine.number()).optional(),
   isPublic: vine.boolean().optional(),
 })

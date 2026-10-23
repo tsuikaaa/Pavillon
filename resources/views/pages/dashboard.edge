@@ -27,7 +27,7 @@
           <li style="border: 1px solid var(--border, #ddd); border-radius: 8px; padding: 12px;">
             <strong>{{ link.label }}</strong>
             <span style="font-size: 13px;">
-              · {{ link.page ? link.page.title : 'aucune page' }}
+              · {{ link.pageTitles }}
               · {{ link.isPublic ? 'Public' : 'Privé' }}
             </span>
             <div class="mono" style="font-size: 12.5px; word-break: break-all;">{{ link.url }}</div>

@@ -15,6 +15,7 @@
             <span class="mono" style="font-size: 12.5px;">/p/{{ page.slug }}</span>
             <div style="font-size: 13px;">{{ page.$extras.links_count }} lien(s)</div>
             <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <a href="{{ route('links.create') }}?page={{ page.id }}" class="btn btn--primary btn--sm">Ajouter un lien</a>
               <a href="/p/{{ page.slug }}" class="btn btn--secondary btn--sm" target="_blank">Voir</a>
               <a href="{{ route('pages.edit', { id: page.id }) }}" class="btn btn--secondary btn--sm">Modifier</a>
               <form

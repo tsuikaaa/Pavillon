@@ -31,6 +31,7 @@ export default class PagesController {
 
   async destroy({ auth, params, response }: HttpContext) {
     const page = await auth.user!.related('pages').query().where('id', params.id).firstOrFail()
+    await page.related('links').detach()
     await page.delete()
     return response.redirect().toRoute('pages.index')
   }

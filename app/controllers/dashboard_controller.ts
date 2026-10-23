@@ -5,7 +5,7 @@ export default class DashboardController {
     const user = auth.user!
 
     const pages = await user.related('pages').query().withCount('links').orderBy('id', 'desc')
-    const links = await user.related('links').query().preload('page').orderBy('id', 'desc')
+    const links = await user.related('links').query().preload('pages').orderBy('id', 'desc')
 
     return view.render('pages/dashboard', {
       user,

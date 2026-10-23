@@ -9,6 +9,10 @@
     >
       {{ csrfField() }}
 
+      @if(!link && selectedPageIds.length > 0)
+        <input type="hidden" name="retour" value="pages" />
+      @end
+
       <label>
         Libellé
         <input type="text" name="label" value="{{ old('label', link ? link.label : '') }}" required />
@@ -25,19 +29,29 @@
         @end
       </label>
 
-      <label>
-        Page
-        @let(selectedPageId = old('pageId', link ? link.pageId : ''))
-        <select name="pageId">
-          <option value="">Aucune page</option>
-          @each(p in pages)
-            <option value="{{ p.id }}" {{ selectedPageId == p.id ? 'selected' : '' }}>{{ p.title }}</option>
-          @end
-        </select>
-        @if(flashMessages.has('inputErrorsBag.pageId'))
-          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.pageId') }}</small>
+      <fieldset style="border: 2px solid var(--brown); border-radius: 16px; padding: 12px 16px;">
+        <legend style="font-weight: 800; padding: 0 6px;">Pages</legend>
+        @if(pages.length === 0)
+          <p style="margin: 0;">Tu n'as pas encore de page.</p>
+        @else
+          <div style="display: grid; gap: 8px;">
+            @each(p in pages)
+              <label style="display: flex; gap: 8px; align-items: center;">
+                <input
+                  type="checkbox"
+                  name="pageIds[]"
+                  value="{{ p.id }}"
+                  {{ selectedPageIds.includes(p.id) ? 'checked' : '' }}
+                />
+                {{ p.title }}
+              </label>
+            @end
+          </div>
         @end
-      </label>
+        @if(flashMessages.has('inputErrorsBag.pageIds'))
+          <small style="color: crimson;">{{ flashMessages.get('inputErrorsBag.pageIds') }}</small>
+        @end
+      </fieldset>
 
       <label style="display: flex; gap: 8px; align-items: center;">
         <input type="checkbox" name="isPublic" value="true" {{ (link && link.isPublic) ? 'checked' : '' }} />
